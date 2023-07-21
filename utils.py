@@ -58,13 +58,13 @@ def _fix_fracs(string):
         substrs = substrs[1:]
         for substr in substrs:
             new_str += "\\frac"
+            try:
+                assert len(substr) >= 2
+            except:
+                return string
             if substr[0] == "{":
                 new_str += substr
             else:
-                try:
-                    assert len(substr) >= 2
-                except:
-                    return string
                 a = substr[0]
                 b = substr[1]
                 if b != "{":
