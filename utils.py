@@ -100,8 +100,9 @@ def _fix_a_slash_b(string):
 
 def _remove_right_units(string):
     # "\\text{ " only ever occurs (at least in the val set) when describing units
-    if "\\text{ " in string:
-        splits = string.split("\\text{ ")
+    import pdb; pdb.set_trace()
+    if "\\text{" in string:
+        splits = string.split("\\text{")
         assert len(splits) == 2
         return splits[0]
     else:
@@ -154,7 +155,7 @@ def _strip_string(string):
     string = string.replace("\\$", "")
 
     # remove units (on the right)
-    string = _remove_right_units(string)
+    #string = _remove_right_units(string)
 
     # remove percentage
     string = string.replace("\\%", "")
