@@ -53,7 +53,7 @@ def extract_math_answer(pred_str):
         pred = pred_str.split('the answer is ')[-1].strip()
     elif 'boxed' in pred_str:
         ans = pred_str.split('boxed')[-1]
-        if (ans[0] == '{'):
+        if ('{' in ans and ans[0] == '{'):
             stack = 1
             a = ''
             for c in ans[1:]:
