@@ -86,23 +86,26 @@ def extract_math_answer(pred_str):
     pred=_strip_string(pred)
     if 'boxed' in pred:
         ans = pred.split('boxed')[-1]
-        if (ans[0] == '{'):
-            stack = 1
-            a = ''
-            for c in ans[1:]:
-                if (c == '{'):
-                    stack += 1
-                    a += c
-                elif (c == '}'):
-                    stack -= 1
-                    if (stack == 0): break
-                    a += c
-                else:
-                    a += c
+        if len(ans) >= 1:
+            if ans[0] == '{':
+                stack = 1
+                a = ''
+                for c in ans[1:]:
+                    if (c == '{'):
+                        stack += 1
+                        a += c
+                    elif (c == '}'):
+                        stack -= 1
+                        if (stack == 0): break
+                        a += c
+                    else:
+                        a += c
+            else:
+                a = ans.split('$')[0].strip()
+            a = _strip_string(a)
+            pred=a
         else:
-            a = ans.split('$')[0].strip()
-        a = _strip_string(a)
-        pred=a
+            pred=''
     return pred
 
 def data_reader(args):
